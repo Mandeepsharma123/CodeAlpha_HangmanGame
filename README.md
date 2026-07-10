@@ -29,7 +29,7 @@ The player has to guess a randomly selected word one letter at a time. The playe
 1. Clone the repository
 
 ```bash
-git clone https://github.com/YourUsername/CodeAlpha_HangmanGame.git
+git clone https://github.com/Mandeepsharma123/CodeAlpha_HangmanGame.git
 ```
 
 2. Open the project folder

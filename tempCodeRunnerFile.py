@@ -1,32 +1,55 @@
-# Function to generate chatbot responses
-def chatbot():
-    print("===== Welcome to Basic Chatbot =====")
-    print("Type 'bye' to end the conversation.\n")
+import random
 
-    while True:
-        user_input = input("You: ").lower()
+# List of predefined words
+words = ["python", "apple", "school", "computer", "flower"]
 
-        if user_input == "hello":
-            print("Bot: Hi!")
+# Select a random word
+word = random.choice(words)
 
-        elif user_input == "how are you":
-            print("Bot: I'm fine, thanks! How about you?")
+# Create blanks for the guessed word
+guessed_word = ["_"] * len(word)
 
-        elif user_input == "i am fine":
-            print("Bot: That's great to hear!")
+# Store guessed letters
+guessed_letters = []
 
-        elif user_input == "what is your name":
-            print("Bot: I am a simple Python Chatbot.")
+# Maximum incorrect guesses
+incorrect_guesses = 0
+max_attempts = 6
 
-        elif user_input == "who created you":
-            print("Bot: I was created using Python.")
+print("===== Welcome to Hangman Game =====")
 
-        elif user_input == "bye":
-            print("Bot: Goodbye! Have a nice day.")
-            break
+while incorrect_guesses < max_attempts and "_" in guessed_word:
+    print("\nWord:", " ".join(guessed_word))
+    print("Incorrect guesses left:", max_attempts - incorrect_guesses)
+    print("Guessed letters:", guessed_letters)
 
-        else:
-            print("Bot: Sorry, I don't understand that.")
+    guess = input("Enter a letter: ").lower()
 
-# Call the function
-chatbot()
+    # Check if input is valid
+    if len(guess) != 1 or not guess.isalpha():
+        print("Please enter only one alphabet.")
+        continue
+
+    # Check if already guessed
+    if guess in guessed_letters:
+        print("You already guessed that letter.")
+        continue
+
+    guessed_letters.append(guess)
+
+    # Check if letter is in the word
+    if guess in word:
+        print("Correct!")
+        for i in range(len(word)):
+            if word[i] == guess:
+                guessed_word[i] = guess
+    else:
+        print("Wrong!")
+        incorrect_guesses += 1
+
+# Final result
+if "_" not in guessed_word:
+    print("\nCongratulations! You guessed the word:", word)
+else:
+    print("\nGame Over!")
+    print("The correct word was:", word)
